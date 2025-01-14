@@ -25,8 +25,8 @@ const updateTasksList = () => {
               <p>${task.text}</p>
               </div>
               <div class="icons">
-            <i class="fa-light fa-pen-to-square" onClick="editTask(${index})></i>
-             <i class="fa-solid fa-trash" style="color: #a13030;" deleteTask(${index})></i> 
+            <i class="fa-light fa-pen-to-square" onClick="editTask(${index})"></i>
+            <img src="img/trash.png" onClick="deleteTask(${index})"> 
               </div>
             </div>
             `;
@@ -36,7 +36,3 @@ const updateTasksList = () => {
     });
 };
 
-document.getElementById('newTask').addEventListener('click', function(e) {
-    e.preventDefault();
-   addTask();
-});
