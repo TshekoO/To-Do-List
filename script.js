@@ -18,13 +18,15 @@ const updateTasksList = () => {
         const listItem = document.createElement('li');
         listItem.innerHTML = `
         <div class="taskItem">
-             <div class="task">
-              <input type="checkbox" class="checkbox"/>
-              <p>Finish this project</p>
+             <div class="task ${task.completed ? "completed" : ""}">  
+              <input type="checkbox" class="checkbox" ${
+                task.completed ? "checked" : ""
+              }/>
+              <p>${task.text}</p>
               </div>
               <div class="icons">
-            <i class="fa-light fa-pen-to-square"></i>
-             <i class="fa-solid fa-trash" style="color: #a13030;"></i> 
+            <i class="fa-light fa-pen-to-square" onClick="editTask(${index})></i>
+             <i class="fa-solid fa-trash" style="color: #a13030;" deleteTask(${index})></i> 
               </div>
             </div>
             `;
