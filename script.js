@@ -3,19 +3,46 @@ const addTask = () => {
     const taskInput = document.getElementById('taskInput');
     const text = taskInput.value.trim();
 
+
     if (text) {
-        tasks.push({text: text,completed: false});
-       updateTasksList();
-       
+        tasks.push({text: text, completed: false});
+        console.log('Tasks:', tasks); // Debug log
+        updateTasksList();
+        updateStats();
     }
 };
+const toggleTaskComplete = (index) => {
+    tasks[index].completed = !tasks[index].completed;
+    updateTasksList();
+};
+   const deleteTask = (index) => {
+    tasks.splice(index, 1);
+    updateTasksList();
+    updateStats();
+};
 
+const editTask = (index) => {   
+    const taskInput = document.getElementById('taskInput');
+    taskInput.value = tasks[index].text;
+
+    tasks.splice(index, 1);
+    updateTasksList();
+    updateStats();
+}
+const updateStats = () => {
+    const completeTasks = tasks.filter((task) => task.completed).length;
+    const totalTasks = tasks.length;    
+    const progress = (completeTasks / totalTasks) * 100;
+    const progressBar = document.getElementById("progress");
+
+    progressBar.style.width = `${progress}%`;   
+}
 const updateTasksList = () => {
-    const tasksList = document.getElementById('task-list');
-    tasksList.innerHTML = "";
+    const taskList = document.getElementById('task-list');
+    taskList.innerHTML = "";
 
-    tasks.forEach((task,index) => {
-        const listItem = document.createElement('li');
+    tasks.forEach((task, index) => {
+        const listItem = document.createElement("li");
         listItem.innerHTML = `
         <div class="taskItem">
              <div class="task ${task.completed ? "completed" : ""}">  
@@ -25,14 +52,18 @@ const updateTasksList = () => {
               <p>${task.text}</p>
               </div>
               <div class="icons">
-            <i class="fa-light fa-pen-to-square" onClick="editTask(${index})"></i>
-            <img src="img/trash.png" onClick="deleteTask(${index})"> 
+              
               </div>
             </div>
             `;
-            listItem.addEventListener('change',()=> toggleTaskComplete(index));
-          tasksList.append(listItem);
-        
+        listItem.addEventListener("change", () => toggleTaskComplete(index));
+        taskList.append(listItem);
     });
 };
 
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById("submit").addEventListener('click', function(e) {
+        e.preventDefault();
+        addTask();
+    });
+});
