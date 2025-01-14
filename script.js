@@ -1,4 +1,8 @@
 let tasks = [];
+
+const saveTasks = () => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+};
 const addTask = () => {
     const taskInput = document.getElementById('taskInput');
     const text = taskInput.value.trim();
@@ -22,7 +26,7 @@ const toggleTaskComplete = (index) => {
 };
 
 const editTask = (index) => {   
-    const taskInput = document.getElementById('taskInput');
+    const taskInput = document.getElementById("taskInput");
     taskInput.value = tasks[index].text;
 
     tasks.splice(index, 1);
@@ -30,15 +34,18 @@ const editTask = (index) => {
     updateStats();
 }
 const updateStats = () => {
-    const completeTasks = tasks.filter((task) => task.completed).length;
+    const completedTasks = tasks.filter((task) => task.completed).length;
     const totalTasks = tasks.length;    
-    const progress = (completeTasks / totalTasks) * 100;
+    const progress = (completedTasks / totalTasks) * 100;
     const progressBar = document.getElementById("progress");
-
+    console.log(progress)
     progressBar.style.width = `${progress}%`;   
+    document.getElementById("numbers"
+
+    ).innerText = `${completedTasks} / ${totalTasks}`;
 }
 const updateTasksList = () => {
-    const taskList = document.getElementById('task-list');
+    const taskList = document.getElementById("task-list");
     taskList.innerHTML = "";
 
     tasks.forEach((task, index) => {
