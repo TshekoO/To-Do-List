@@ -137,7 +137,7 @@ button{
 /* Footer styles */
 footer {
   
-    color: #000000;
+    color: #8f0c0c;
     padding: 30px 0;
     text-align: center;
 }
@@ -152,4 +152,10 @@ footer {
     flex: 1;
     padding: 20px;
     min-width: 250px;
+}
+
+.due-date {
+  font-size: 0.8em;
+  color: gray;
+  margin-left: 10px;
 }
