@@ -4,20 +4,22 @@ const saveTasks = () => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 };
 const addTask = () => {
-    const taskInput = document.getElementById('taskInput');
+    const taskInput = document.getElementById("taskInput");
     const text = taskInput.value.trim();
 
 
     if (text) {
         tasks.push({text: text, completed: false});
-        console.log('Tasks:', tasks); // Debug log
+      taskInput.value = "";
         updateTasksList();
         updateStats();
     }
 };
+
 const toggleTaskComplete = (index) => {
     tasks[index].completed = !tasks[index].completed;
     updateTasksList();
+    updateStats();
 };
    const deleteTask = (index) => {
     tasks.splice(index, 1);
