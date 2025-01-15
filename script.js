@@ -1,3 +1,11 @@
+document.addEventListener("DOMContentLoaded",()=>{
+    const storedTasks = JSON.parse(localStorage.getItem('tasks')) 
+    if (storedTasks) {
+       storedTasks.forEach((task) => tasks.push(task))
+        updateStats();
+        updateTasksList();
+    }
+})
 let tasks = [];
 
 const saveTasks = () => {
@@ -13,6 +21,7 @@ const addTask = () => {
       taskInput.value = "";
         updateTasksList();
         updateStats();
+        saveTasks();
     }
 };
 
@@ -20,11 +29,13 @@ const toggleTaskComplete = (index) => {
     tasks[index].completed = !tasks[index].completed;
     updateTasksList();
     updateStats();
+    saveTasks();
 };
    const deleteTask = (index) => {
     tasks.splice(index, 1);
     updateTasksList();
     updateStats();
+    saveTasks();
 };
 
 const editTask = (index) => {   
@@ -34,6 +45,7 @@ const editTask = (index) => {
     tasks.splice(index, 1);
     updateTasksList();
     updateStats();
+    saveTasks();
 }
 const updateStats = () => {
     const completedTasks = tasks.filter((task) => task.completed).length;
@@ -61,7 +73,7 @@ const updateTasksList = () => {
               <p>${task.text}</p>
               </div>
               <div class="icons">
-               <img src="./img/edit-removebg-preview.png" onclick="editTask(${index})" />
+               <img src="./img/edit3-removebg-preview.png" onclick="editTask(${index})" />
                <img src="./img/delete-removebg-preview.png" onclick="deleteTask(${index})" />
               </div>
             </div>
