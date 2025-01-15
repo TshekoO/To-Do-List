@@ -25,6 +25,7 @@ body{
     max-width: 500px;
   
 }
+
 .stats-container{
     padding: 30px;
     display: flex;
@@ -132,4 +133,23 @@ button{
 
     text-decoration: line-through;
     color: var(--teal);
+}
+/* Footer styles */
+footer {
+  
+    color: #000000;
+    padding: 30px 0;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    flex: 1;
+    padding: 20px;
+    min-width: 250px;
 }
