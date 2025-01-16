@@ -1,67 +1,67 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     const storedTasks = JSON.parse(localStorage.getItem('tasks'));
     if (storedTasks) {
-        storedTasks.forEach((task) => tasks.push(task));
-        updateStats();
-        updateTasksList();
+        storedTasks.forEach(task => tasks.push(task));
+        await updateStats();
+        await updateTasksList();
     }
 });
 
 let tasks = [];
 
-const saveTasks = () => {
+const saveTasks = async () => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 };
 
-const addTask = () => {
+const addTask = async () => {
     const taskInput = document.getElementById("taskInput");
     const dueDateInput = document.getElementById("dueDateInput");
     const text = taskInput.value.trim();
     const dueDate = dueDateInput.value;
 
     if (text) {
-        tasks.push({ text: text, completed: false, dueDate: dueDate });
+        tasks.push({ text, completed: false, dueDate });
         taskInput.value = "";
         dueDateInput.value = "";
-        updateTasksList();
-        updateStats();
-        saveTasks();
+        await updateTasksList();
+        await updateStats();
+        await saveTasks();
     }
 };
 
-const toggleTaskComplete = (index) => {
+const toggleTaskComplete = async (index) => {
     tasks[index].completed = !tasks[index].completed;
     if (tasks[index].completed) {
         tasks[index].completedAt = new Date().toLocaleString();
     } else {
         delete tasks[index].completedAt;
     }
-    updateTasksList();
-    updateStats();
-    saveTasks();
+    await updateTasksList();
+    await updateStats();
+    await saveTasks();
 };
 
-const deleteTask = (index) => {
+const deleteTask = async (index) => {
     tasks.splice(index, 1);
-    updateTasksList();
-    updateStats();
-    saveTasks();
+    await updateTasksList();
+    await updateStats();
+    await saveTasks();
 };
 
-const editTask = (index) => {
+const editTask = async (index) => {
     const taskInput = document.getElementById("taskInput");
     const dueDateInput = document.getElementById("dueDateInput");
     taskInput.value = tasks[index].text;
     dueDateInput.value = tasks[index].dueDate;
 
     tasks.splice(index, 1);
-    updateTasksList();
-    updateStats();
-    saveTasks();
+    await updateTasksList();
+    await updateStats();
+    await saveTasks();
 };
 
-const updateStats = () => {
-    const completedTasks = tasks.filter((task) => task.completed).length;
+const updateStats = async () => {
+    const completedTasks = tasks.filter(task => task.completed).length;
     const totalTasks = tasks.length;
     const progress = (completedTasks / totalTasks) * 100;
     const progressBar = document.getElementById("progress");
@@ -69,7 +69,7 @@ const updateStats = () => {
     document.getElementById("numbers").innerText = `${completedTasks} / ${totalTasks}`;
 };
 
-const updateTasksList = () => {
+const updateTasksList = async () => {
     const taskList = document.getElementById("task-list");
     taskList.innerHTML = "";
 
@@ -94,9 +94,9 @@ const updateTasksList = () => {
     });
 };
 
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById("submit").addEventListener('click', function(e) {
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById("submit").addEventListener('click', async (e) => {
         e.preventDefault();
-        addTask();
+        await addTask();
     });
 });
