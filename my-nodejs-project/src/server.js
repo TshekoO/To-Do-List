@@ -1,8 +1,12 @@
 const express = require('express');
 const path = require('path');
+const connectDB = require('./db');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Connect to MongoDB
+connectDB();
 
 // Middleware to parse JSON bodies
 app.use(express.json());
